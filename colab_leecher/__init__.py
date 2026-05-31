@@ -14,15 +14,11 @@ BOT_TOKEN = credentials["BOT_TOKEN"]
 OWNER = credentials["USER_ID"]
 DUMP_ID = credentials["DUMP_ID"]
 
-
-logging.basicConfig(level=logging.INFO)
-
-install()
-
+# Ensure event loop exists before using Pyrogram
 try:
-    loop = asyncio.get_event_loop()
+    asyncio.get_event_loop()
 except RuntimeError:
-    loop = asyncio.new_event_loop()
-    asyncio.set_event_loop(loop)
+    asyncio.set_event_loop(asyncio.new_event_loop())
+    
 
 colab_bot = Client("my_bot", api_id=API_ID, api_hash=API_HASH, bot_token=BOT_TOKEN)
